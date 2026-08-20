@@ -143,10 +143,7 @@ p{ color: var(--text-dim); line-height: 1.6; margin: 0; text-wrap: pretty; }
   background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(10,132,255,0.15), transparent 60%);
 }
 .hero-window img{
-  width: 100%; display:block;
-  /* Light scale to crop excess wallpaper without clipping the macOS title bar. */
-  transform: scale(1.08);
-  transform-origin: center center;
+  width: 100%; height: auto; display:block;
 }
 
 .hero-glow{
@@ -550,8 +547,8 @@ footer{ border-top: 1px solid var(--line); padding: 48px var(--pad); }
 
     <article class="card f-compare" id="compare">
       <div class="compare-inner">
-        <div class="compare-img before" style="background-image: url('./examples/mist-and-far-trees.jpg')"></div>
-        <div class="compare-img after" style="background-image: url('./examples/mist-and-far-trees.jpg')"></div>
+        <div class="compare-img before" style="background-image: url('./examples/mist-and-far-trees.webp')"></div>
+        <div class="compare-img after" style="background-image: url('./examples/mist-and-far-trees.webp')"></div>
         <div class="compare-handle"></div>
         <div class="compare-label l">Original</div>
         <div class="compare-label r">Compressed</div>
