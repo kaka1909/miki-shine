@@ -313,8 +313,7 @@ p{ color: var(--text-dim); line-height: 1.6; margin: 0; text-wrap: pretty; }
   background: var(--surface); border: 1px solid var(--line);
   border-radius: var(--radius-lg); overflow:hidden; position: relative;
 }
-.screen-card img{ cursor: zoom-in; transition: transform .3s ease; }
-.screen-card:hover img{ transform: scale(1.02); }
+.screen-card img{ cursor: zoom-in; }
 
 /* Lightbox */
 .lightbox{
@@ -343,7 +342,10 @@ p{ color: var(--text-dim); line-height: 1.6; margin: 0; text-wrap: pretty; }
 .lightbox-close:hover{ background: rgba(255,255,255,0.18); }
 /* Wide card takes the full width on top; preset + compare share the row below. */
 .screen-card.wide{ grid-column: span 2; }
-.screen-card img{ width: 100%; display:block; }
+.screen-card img{
+  width: 100%; height: auto; display:block;
+  object-fit: contain; transform: none;
+}
 .screen-meta{
   position: absolute; bottom: 0; left: 0; right: 0; padding: 18px 22px;
   background: linear-gradient(180deg, transparent 0%, rgba(10,11,13,0.92) 80%);
