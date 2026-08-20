@@ -550,8 +550,8 @@ footer{ border-top: 1px solid var(--line); padding: 48px var(--pad); }
 
     <article class="card f-compare" id="compare">
       <div class="compare-inner">
-        <div class="compare-img before"><img src="./examples/mist-and-far-trees.webp" alt="" width="1600" height="1067" loading="lazy" decoding="async"></div>
-        <div class="compare-img after"><img src="./examples/mist-and-far-trees.webp" alt="" width="1600" height="1067" loading="lazy" decoding="async"></div>
+        <div class="compare-img before"><img data-src="./examples/mist-and-far-trees.webp" alt="" width="1600" height="1067" decoding="async"></div>
+        <div class="compare-img after"><img data-src="./examples/mist-and-far-trees.webp" alt="" width="1600" height="1067" decoding="async"></div>
         <div class="compare-handle"></div>
         <div class="compare-label l">Original</div>
         <div class="compare-label r">Compressed</div>
@@ -699,7 +699,7 @@ footer{ border-top: 1px solid var(--line); padding: 48px var(--pad); }
 
     <div class="screens">
       <div class="screen-card wide">
-        <img src="./screenshots/compare-web.webp" alt="Compare view showing original and compressed image side by side" width="2080" height="1300" loading="lazy" decoding="async">
+        <img src="./screenshots/compare-web.webp" alt="Compare view showing original and compressed image side by side" width="1600" height="1000" loading="lazy" decoding="async">
         <div class="screen-meta">
           <h3>Compare mode</h3>
           <p>Split-slider + pinch-to-zoom. See every pixel before you commit.</p>
@@ -908,6 +908,31 @@ footer{ border-top: 1px solid var(--line); padding: 48px var(--pad); }
 </div>
 
 <script>
+// Load the comparison photo only when its interactive card enters the viewport.
+(function(){
+  const images = document.querySelectorAll('img[data-src]');
+  if (!images.length) return;
+
+  function load(image){
+    image.src = image.dataset.src;
+    image.removeAttribute('data-src');
+  }
+
+  if (!('IntersectionObserver' in window)) {
+    images.forEach(load);
+    return;
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      load(entry.target);
+      observer.unobserve(entry.target);
+    });
+  });
+  images.forEach(image => observer.observe(image));
+})();
+
 // FAQ toggles
 document.querySelectorAll('.faq-item').forEach(it => {
   it.querySelector('.faq-q').addEventListener('click', () => it.classList.toggle('open'));
