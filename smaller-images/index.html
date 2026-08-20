@@ -204,7 +204,8 @@ p{ color: var(--text-dim); line-height: 1.6; margin: 0; text-wrap: pretty; }
   --split: 50%;
   user-select: none;
 }
-.compare-img{ position:absolute; inset:0; background-size: cover; background-position: center; background-color: #1a1d22; }
+.compare-img{ position:absolute; inset:0; background-color: #1a1d22; }
+.compare-img img{ width:100%; height:100%; object-fit:cover; display:block; }
 /* Both sides identical — compression is honest, not blurry.
    The right (compressed) side gets a barely-perceptible tonal nudge so the
    slider has a subtle visual difference; the real story is the file-size stat. */
@@ -549,8 +550,8 @@ footer{ border-top: 1px solid var(--line); padding: 48px var(--pad); }
 
     <article class="card f-compare" id="compare">
       <div class="compare-inner">
-        <div class="compare-img before" style="background-image: url('./examples/mist-and-far-trees.webp')"></div>
-        <div class="compare-img after" style="background-image: url('./examples/mist-and-far-trees.webp')"></div>
+        <div class="compare-img before"><img src="./examples/mist-and-far-trees.webp" alt="" width="1600" height="1067" loading="lazy" decoding="async"></div>
+        <div class="compare-img after"><img src="./examples/mist-and-far-trees.webp" alt="" width="1600" height="1067" loading="lazy" decoding="async"></div>
         <div class="compare-handle"></div>
         <div class="compare-label l">Original</div>
         <div class="compare-label r">Compressed</div>
