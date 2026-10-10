@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>SmallerImage — Batch image compressor, converter &amp; resizer for Mac</title>
+<title>SmallerImage | Batch images to the exact size, format and dimensions</title>
 
 <!-- SEO -->
-<meta name="description" content="SmallerImage is a native Mac app to batch compress, convert and resize images. HEIC, JPG, PNG, WebP, TIFF, GIF. Side-by-side quality comparison, reusable presets for passports, LinkedIn, Instagram and web. 100% on-device, privacy-first." />
-<meta name="keywords" content="mac image compressor, batch image resize mac, heic to jpg mac, image converter mac, compress jpeg mac, webp converter, png compressor, image preset, passport photo resizer, linkedin photo size, instagram photo size, offline image compressor" />
+<meta name="description" content="Prepare image batches for websites, clients and uploads. Set the target file size, format and dimensions, compare each result, or run multiple presets as a Delivery Pack. Private processing on your Mac." />
+<meta name="keywords" content="mac image compressor, batch image resize mac, exact file size image, delivery pack images, heic to jpg mac, image converter mac, compress jpeg mac, webp converter, png compressor, image preset, passport photo resizer, offline image compressor" />
 <meta name="author" content="SmallerImage" />
-<meta property="og:title" content="SmallerImage — Smaller images. Sharper results." />
-<meta property="og:description" content="Batch compress, convert and resize images on your Mac. Visual before/after comparison. Privacy-first, runs offline." />
+<meta property="og:title" content="SmallerImage | Every image, ready to deliver." />
+<meta property="og:description" content="Set the target size, format and dimensions for a whole batch. Compare each result or create a multi-preset Delivery Pack on your Mac." />
 <meta property="og:type" content="product" />
 <meta name="twitter:card" content="summary_large_image" />
 
@@ -21,7 +21,7 @@
   "name": "SmallerImage",
   "applicationCategory": "MultimediaApplication",
   "operatingSystem": "macOS 14+",
-  "description": "Batch image compressor, converter and resizer for Mac with visual before/after comparison and reusable presets."
+  "description": "Prepare image batches to a target file size, format and dimensions, compare each result, and create multi-preset Delivery Packs on Mac."
 }
 </script>
 
@@ -148,7 +148,7 @@ p{ color: var(--text-dim); line-height: 1.6; margin: 0; text-wrap: pretty; }
 
 .hero-glow{
   position: absolute; left: 50%; top: 30%; transform: translate(-50%,-50%);
-  width: 900px; height: 500px; z-index: -1;
+  width: min(900px, 100vw); height: 500px; z-index: -1;
   background: radial-gradient(ellipse, rgba(10,132,255,0.18) 0%, transparent 60%);
   filter: blur(60px); pointer-events:none;
 }
@@ -168,11 +168,18 @@ p{ color: var(--text-dim); line-height: 1.6; margin: 0; text-wrap: pretty; }
 .stat-chip .g{ color: var(--accent-2); }
 .stat-chip .label{ color: var(--text-dim); font-size: 12px; }
 
-/* LOGOS STRIP */
-.logos{ max-width: var(--page-max); margin: 48px auto 0; padding: 0 var(--pad); display:flex; flex-direction:column; align-items:center; gap: 18px; }
-.logos-label{ color: var(--text-mute); font-size: 12px; font-family: var(--font-mono); letter-spacing: 0.15em; text-transform: uppercase; }
-.logos-row{ display:flex; gap: 48px; flex-wrap:wrap; justify-content:center; color: var(--text-mute); font-weight: 600; font-size: 14px; }
-.logos-row span{ opacity: 0.8; letter-spacing: -0.01em; }
+/* CAPABILITY STRIP */
+.capability-strip{
+  max-width: var(--page-max); margin: 48px auto 0; padding: 0 var(--pad);
+  display:grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+}
+.capability-item{
+  min-height: 126px; padding: 22px; border: 1px solid var(--line);
+  border-radius: var(--radius); background: linear-gradient(145deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015));
+}
+.capability-kicker{ font-family: var(--font-mono); font-size: 11px; color: var(--accent); letter-spacing: .08em; text-transform:uppercase; }
+.capability-item h3{ margin: 9px 0 5px; font-size: 17px; }
+.capability-item p{ font-size: 13px; line-height: 1.5; }
 
 /* FEATURES GRID */
 .grid{ display:grid; gap: 16px; }
@@ -187,10 +194,13 @@ p{ color: var(--text-dim); line-height: 1.6; margin: 0; text-wrap: pretty; }
 .card h3{ margin-bottom: 8px; }
 .card p{ font-size: 14.5px; }
 
-.f-compare{ grid-column: span 4; grid-row: span 2; padding: 0; }
-.f-presets{ grid-column: span 2; grid-row: span 2; }
-.f-privacy{ grid-column: span 3; }
-.f-langs{ grid-column: span 3; }
+.f-compare{ grid-column: span 4; grid-row: span 2; padding: 0; order:1; }
+.f-presets{ grid-column: span 2; grid-row: span 2; order:2; }
+.f-delivery{ grid-column: span 6; order:3; }
+.f-format{ grid-column: span 3; order:4; }
+.f-resize{ grid-column: span 3; order:5; }
+.f-privacy{ grid-column: span 3; order:6; }
+.f-langs{ grid-column: span 3; order:7; }
 
 .card-head{ display:flex; align-items:center; gap: 10px; margin-bottom: 12px; }
 .card-head .ic{
@@ -261,12 +271,36 @@ p{ color: var(--text-dim); line-height: 1.6; margin: 0; text-wrap: pretty; }
 .preset-info .n{ font-size: 13.5px; font-weight: 600; }
 .preset-info .m{ font-size: 11.5px; color: var(--text-mute); font-family: var(--font-mono); }
 
+.delivery-rail{
+  display:grid; grid-template-columns: minmax(150px,.8fr) 34px repeat(3,minmax(150px,1fr));
+  gap:10px; align-items:stretch; margin-top:18px;
+}
+.delivery-source,.delivery-output{
+  border:1px solid var(--line); border-radius:12px; background:var(--surface-2);
+  padding:14px 16px; min-width:0;
+}
+.delivery-source{ display:flex; flex-direction:column; justify-content:center; }
+.delivery-source strong,.delivery-output strong{ display:block; font-size:13px; margin-bottom:5px; }
+.delivery-source span,.delivery-output span{ color:var(--text-mute); font:11.5px/1.45 var(--font-mono); }
+.delivery-arrow{ display:grid; place-items:center; color:var(--accent); font:20px var(--font-mono); }
+.delivery-output{ position:relative; overflow:hidden; }
+.delivery-output::before{ content:""; position:absolute; inset:0 auto 0 0; width:3px; background:var(--accent-2); opacity:.75; }
+
 .format-list{ display:flex; flex-wrap:wrap; gap: 8px; margin-top: 16px; }
 .format-pill{
   padding: 8px 14px; border-radius: 999px; background: var(--surface-2);
   border: 1px solid var(--line); font-family: var(--font-mono); font-size: 12.5px; font-weight: 500;
 }
 .format-pill .arrow{ color: var(--text-mute); margin: 0 6px; }
+
+.dimension-list{ margin-top: 16px; display:flex; flex-direction:column; gap: 8px; }
+.dimension-row{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding: 10px 12px; border-radius:10px; background:var(--surface-2); border:1px solid var(--line);
+  font-family:var(--font-mono); font-size:12px; color:var(--text-dim);
+}
+.dimension-row strong{ color:var(--text); font-weight:500; }
+.dimension-row .result{ color:var(--accent-2); text-align:right; }
 
 .privacy-visual{
   margin-top: 18px; padding: 18px;
@@ -445,17 +479,22 @@ footer{ border-top: 1px solid var(--line); padding: 48px var(--pad); }
 /* RESPONSIVE */
 @media (max-width: 960px){
   .features{ grid-template-columns: repeat(2, 1fr); }
-  .f-compare, .f-presets, .f-privacy, .f-langs{ grid-column: span 2; grid-row: auto; }
+  .f-compare, .f-presets, .f-delivery, .f-format, .f-resize, .f-privacy, .f-langs{ grid-column: span 2; grid-row: auto; }
+  .delivery-rail{ grid-template-columns:1fr; }
+  .delivery-arrow{ transform:rotate(90deg); min-height:24px; }
   .f-compare .compare-inner{ min-height: 320px; }
+  .capability-strip{ grid-template-columns: 1fr; }
   .screens, .usecases, .pricing{ grid-template-columns: 1fr; }
-  .screen-card.wide{ grid-row: auto; }
+  .screen-card.wide{ grid-column: span 1; grid-row: auto; }
   .footer-inner{ grid-template-columns: 1fr 1fr; }
   .nav-links{ display: none; }
 }
 @media (max-width: 600px){
   .features{ grid-template-columns: 1fr; }
-  .f-compare, .f-presets, .f-privacy, .f-langs{ grid-column: span 1; }
+  .f-compare, .f-presets, .f-delivery, .f-format, .f-resize, .f-privacy, .f-langs{ grid-column: span 1; }
   .stat-chip{ display:none; }
+  .compare-overlay{ align-items:flex-start; flex-direction:column; gap:10px; }
+  .compare-overlay .co-stats{ text-align:left; }
   .section{ padding: 72px 20px; }
   .footer-inner{ grid-template-columns: 1fr; }
 }
@@ -490,11 +529,10 @@ footer{ border-top: 1px solid var(--line); padding: 48px var(--pad); }
   <div class="hero-logo">
     <img src="./assets/logo.webp" alt="SmallerImage logo" width="176" height="176" fetchpriority="high">
   </div>
-  <h1>Smaller images.<br/><span class="accent">Sharper results.</span></h1>
+  <h1>Every image.<br/><span class="accent">Ready to deliver.</span></h1>
   <p class="hero-sub">
-    The native Mac app that batch-compresses, converts and resizes images —
-    with a visual before/after slider, reusable presets for common destinations,
-    and everything running privately on your device.
+    Set the target file size, format and dimensions once. Process the whole batch,
+    compare each result, or create a multi-preset Delivery Pack. Your images stay on your Mac.
   </p>
   <div class="hero-ctas">
     <a class="btn btn-primary" href="#download">
@@ -508,7 +546,7 @@ footer{ border-top: 1px solid var(--line); padding: 48px var(--pad); }
     <span>·</span>
     <span>Universal · Apple Silicon native</span>
     <span>·</span>
-    <span>Private &amp; offline</span>
+    <span>No image uploads</span>
   </div>
 
   <div class="hero-stage">
@@ -531,12 +569,23 @@ footer{ border-top: 1px solid var(--line); padding: 48px var(--pad); }
   </div>
 </header>
 
-<!-- LOGOS -->
-<section class="logos">
-  <div class="logos-label">Loved by</div>
-  <div class="logos-row">
-    <span>Designers</span><span>·</span><span>Photographers</span><span>·</span><span>Product teams</span><span>·</span><span>Indie devs</span><span>·</span><span>Bloggers</span>
-  </div>
+<!-- CORE CAPABILITIES -->
+<section class="capability-strip" aria-label="Core capabilities">
+  <article class="capability-item">
+    <div class="capability-kicker">01 · Target</div>
+    <h3>Hit the required file size</h3>
+    <p>Set a size limit for the batch instead of exporting and checking by hand.</p>
+  </article>
+  <article class="capability-item">
+    <div class="capability-kicker">02 · Convert</div>
+    <h3>Deliver the right format</h3>
+    <p>Convert between JPG, PNG, HEIC, WebP, TIFF and AVIF in one pass.</p>
+  </article>
+  <article class="capability-item">
+    <div class="capability-kicker">03 · Deliver</div>
+    <h3>Create every version in one run</h3>
+    <p>Use multiple presets to prepare client, web and social copies together.</p>
+  </article>
 </section>
 
 <!-- FEATURES BENTO -->
@@ -552,19 +601,48 @@ footer{ border-top: 1px solid var(--line); padding: 48px var(--pad); }
       <div class="compare-inner">
         <div class="compare-img before"><img data-src="./examples/mist-and-far-trees.webp" alt="" width="1600" height="1067" decoding="async"></div>
         <div class="compare-img after"><img data-src="./examples/mist-and-far-trees.webp" alt="" width="1600" height="1067" decoding="async"></div>
-        <div class="compare-handle"></div>
+        <div class="compare-handle" role="slider" tabindex="0" aria-label="Compare original and processed output" aria-valuemin="2" aria-valuemax="98" aria-valuenow="50"></div>
         <div class="compare-label l">Original</div>
-        <div class="compare-label r">Compressed</div>
+        <div class="compare-label r">Output</div>
         <div class="compare-overlay">
           <div>
-            <div class="co-title">See every pixel before you commit.</div>
-            <div class="co-sub">Drag the slider, pinch to zoom — no detail missed.</div>
+            <div class="co-title">Preview the complete output.</div>
+            <div class="co-sub">Check the crop, dimensions, format and detail before export.</div>
           </div>
           <div class="co-stats">
-            <span class="big">−23%</span>
-            <span>5.2 MB → 3.9 MB</span>
+            <span class="big">JPG → WebP</span>
+            <span>6000×4000 → 1920×1280 · −23%</span>
           </div>
         </div>
+      </div>
+    </article>
+
+    <article class="card f-format">
+      <div class="card-head">
+        <div class="ic">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h11l-3-3m3 3-3 3M17 17H6l3 3m-3-3 3-3"/></svg>
+        </div>
+        <h3>Batch format conversion</h3>
+      </div>
+      <p>Choose one output format for the entire batch. Convert camera exports, screenshots and web assets without another app.</p>
+      <div class="format-list" aria-label="Example format conversions">
+        <div class="format-pill">HEIC <span class="arrow">→</span> JPG</div>
+        <div class="format-pill">PNG <span class="arrow">→</span> WebP</div>
+        <div class="format-pill">TIFF <span class="arrow">→</span> AVIF</div>
+      </div>
+    </article>
+
+    <article class="card f-resize">
+      <div class="card-head">
+        <div class="ic">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/><path d="M3 8l6-6M21 8l-6-6M3 16l6 6M21 16l-6 6"/></svg>
+        </div>
+        <h3>Resize or crop to exact dimensions</h3>
+      </div>
+      <p>Use ≤ Max to preserve the full image, or = Equal to fill the target and center-crop the excess.</p>
+      <div class="dimension-list">
+        <div class="dimension-row"><strong>≤ Max</strong><span class="result">fit inside · no crop</span></div>
+        <div class="dimension-row"><strong>= Equal</strong><span class="result">exact size · center crop</span></div>
       </div>
     </article>
 
@@ -575,7 +653,7 @@ footer{ border-top: 1px solid var(--line); padding: 48px var(--pad); }
         </div>
         <h3>One-click presets</h3>
       </div>
-      <p>Ready-made specs for passports, visas, LinkedIn, Instagram, Etsy, WordPress, email. Save your own — sync across devices.</p>
+      <p>Use ready-made specs for passports, social posts, email and websites. Save your own recipes for repeat work.</p>
       <div class="preset-list">
         <div class="preset-item">
           <div class="preset-chip u">U</div>
@@ -608,20 +686,37 @@ footer{ border-top: 1px solid var(--line); padding: 48px var(--pad); }
       </div>
     </article>
 
+    <article class="card f-delivery">
+      <div class="card-head">
+        <div class="ic">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8V21H3V8"/><path d="M1 3h22v5H1zM10 12h4"/></svg>
+        </div>
+        <h3>One batch. Every delivery size.</h3>
+      </div>
+      <p>Delivery Pack runs several presets against the same images and sorts each result into a named folder. Available with Pro.</p>
+      <div class="delivery-rail" aria-label="One source batch creates three organized output folders">
+        <div class="delivery-source"><strong>24 source images</strong><span>one drag into SmallerImage</span></div>
+        <div class="delivery-arrow" aria-hidden="true">→</div>
+        <div class="delivery-output"><strong>Client Full Size</strong><span>JPG · full width · 90%</span></div>
+        <div class="delivery-output"><strong>Web Gallery</strong><span>WebP · ≤500 KB · 1920w</span></div>
+        <div class="delivery-output"><strong>Social</strong><span>JPG · 1080×1350 · crop</span></div>
+      </div>
+    </article>
+
     <article class="card f-privacy">
       <div class="card-head">
         <div class="ic" style="color: var(--accent-2);">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L4 6v6c0 5 3.5 9.5 8 10 4.5-.5 8-5 8-10V6z"/></svg>
         </div>
-        <h3>100% on your device</h3>
+        <h3>Share the image, not its location</h3>
       </div>
-      <p>Nothing leaves your Mac. No accounts. No servers. No upload limits.</p>
+      <p>Keep metadata, remove GPS coordinates, or strip EXIF before export. Image processing stays on your Mac.</p>
       <div class="privacy-visual">
         <div class="shield">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
         </div>
         <div class="p-text">
-          <b>Zero network calls.</b> Works offline. Passes Apple's sandbox + hardened runtime.
+          <b>Zero image uploads.</b> No analytics, ads or processing servers.
         </div>
       </div>
     </article>
@@ -637,6 +732,7 @@ footer{ border-top: 1px solid var(--line); padding: 48px var(--pad); }
       <div class="lang-grid">
         <div class="lang-chip"><div class="flag">🇺🇸</div><div class="name">English</div></div>
         <div class="lang-chip"><div class="flag">🇨🇳</div><div class="name">简体中文</div></div>
+        <div class="lang-chip"><div class="flag">繁</div><div class="name">繁體中文</div></div>
         <div class="lang-chip"><div class="flag">🇯🇵</div><div class="name">日本語</div></div>
         <div class="lang-chip"><div class="flag">🇰🇷</div><div class="name">한국어</div></div>
         <div class="lang-chip"><div class="flag">🇪🇸</div><div class="name">Español</div></div>
@@ -652,14 +748,14 @@ footer{ border-top: 1px solid var(--line); padding: 48px var(--pad); }
   <div class="section-head" style="margin-bottom: 40px;">
     <span class="eyebrow"><span class="dot"></span> The flow</span>
     <h2 style="margin-top:16px;">No guesswork.<br/>No round-trips.</h2>
-    <p style="max-width:580px; margin: 16px auto 0;">Most compression apps make you commit, check, then re-import to retry. SmallerImage shows you the result <em>before</em> you press Compress — and lets you iterate without losing the original.</p>
+    <p style="max-width:580px; margin: 16px auto 0;">Set file size, format and dimensions in one place. SmallerImage projects the result before processing, then keeps the original available while you refine the output.</p>
   </div>
 
   <div class="usecases">
     <article class="uc">
       <div class="uc-chip">step 1 · predict</div>
-      <h3>See the target before you compress</h3>
-      <p>Pick a preset or set a size. Every file row instantly shows the new dimensions, format, and projected file size — green when it fits, so you know exactly what's coming out.</p>
+      <h3>Define the complete output</h3>
+      <p>Pick a preset or set the size yourself. File rows preview the dimensions, format and estimated file size. After processing, check the actual output; results above your file-size limit are flagged.</p>
       <div class="uc-examples">
         <span>5.2 MB → 488 KB (-90%)</span>
         <span>6000×4000 → 1920×1280</span>
@@ -669,7 +765,7 @@ footer{ border-top: 1px solid var(--line); padding: 48px var(--pad); }
     <article class="uc">
       <div class="uc-chip">step 2 · tweak</div>
       <h3>One panel, everything in reach</h3>
-      <p>Quality, file size cap, dimensions, format, suffix — laid out together on the right. Drag, type, switch — every projection updates live across every file. No buried menus.</p>
+      <p>Quality, PNG FAST–BEST optimization, target file size, dimensions, format and suffix sit together on the right. Adjust the controls to see the estimates update across the batch.</p>
       <div class="uc-examples">
         <span>Quality 1.00</span>
         <span>File size ≤ 500 KB</span>
@@ -679,7 +775,7 @@ footer{ border-top: 1px solid var(--line); padding: 48px var(--pad); }
     <article class="uc">
       <div class="uc-chip">step 3 · iterate</div>
       <h3>Redo without losing originals</h3>
-      <p>Not happy with a result? Adjust the preset and re-compress — no re-importing, no re-dragging. Originals stay untouched. Compare A/B variants until it's right.</p>
+      <p>Not happy with a result? Adjust the preset and process it again without re-importing or re-dragging. Originals stay untouched. Compare variants until the size, format and framing are right.</p>
       <div class="uc-examples">
         <span>Non-destructive</span>
         <span>Originals preserved</span>
@@ -699,24 +795,24 @@ footer{ border-top: 1px solid var(--line); padding: 48px var(--pad); }
 
     <div class="screens">
       <div class="screen-card wide">
-        <img src="./screenshots/compare-web.webp" alt="Compare view showing original and compressed image side by side" width="1600" height="1000" loading="lazy" decoding="async">
+        <img src="./screenshots/compare-web.webp" alt="Compare view showing the original image and processed output side by side" width="1600" height="1000" loading="lazy" decoding="async">
         <div class="screen-meta">
           <h3>Compare mode</h3>
-          <p>Split-slider + pinch-to-zoom. See every pixel before you commit.</p>
+          <p>Inspect the processed image, format, dimensions and file size before export.</p>
         </div>
       </div>
       <div class="screen-card">
         <img src="./screenshots/preset-web.webp" alt="Preset manager for ID photos, social media and web" width="2080" height="1300" loading="lazy" decoding="async">
         <div class="screen-meta">
           <h3>Preset manager</h3>
-          <p>Built-in specs + your favorites, starred for one-tap reuse.</p>
+          <p>Save file size, format, dimensions and crop behavior as one reusable recipe.</p>
         </div>
       </div>
       <div class="screen-card">
         <img src="./screenshots/batch-web.webp" alt="Batch processing view with green compression badges" width="2080" height="1300" loading="lazy" decoding="async">
         <div class="screen-meta">
           <h3>Batch workspace</h3>
-          <p>Green badges surface the savings. Per-row actions: compare, export, redo, remove.</p>
+          <p>See each file's new size, format and dimensions. Compare, export or redo per row.</p>
         </div>
       </div>
     </div>
@@ -733,18 +829,18 @@ footer{ border-top: 1px solid var(--line); padding: 48px var(--pad); }
   <div class="usecases">
     <article class="uc">
       <div class="uc-chip">for · photographers</div>
-      <h3>Thousands of RAW exports, instantly social-ready</h3>
-      <p>Drop an export folder. Pick Instagram. Review the result and export.</p>
+      <h3>One photo batch, ready for every destination</h3>
+      <p>Build client, portfolio and social copies in one run, with separate formats and dimensions.</p>
       <div class="uc-examples">
-        <span>TIFF → JPG, ≤5MB</span>
-        <span>Keep max resolution</span>
-        <span>Local, private processing</span>
+        <span>Client JPG · full size</span>
+        <span>WebP · ≤500KB · 1920w</span>
+        <span>Social · exact crop</span>
       </div>
     </article>
     <article class="uc">
       <div class="uc-chip">for · everyone</div>
-      <h3>Passport, visa &amp; ID photos that pass the first time</h3>
-      <p>Start from common passport and visa presets, then review the official requirements before submitting.</p>
+      <h3>Passport, visa &amp; ID photos at the required dimensions</h3>
+      <p>Start from common passport and visa presets with exact dimensions, output format and file-size limits.</p>
       <div class="uc-examples">
         <span>US Passport · ≤240KB · 600×600</span>
         <span>Schengen · ≤200KB · 413×531</span>
@@ -790,9 +886,10 @@ footer{ border-top: 1px solid var(--line); padding: 48px var(--pad); }
       <span class="badge">Most popular</span>
       <h3>Pro · Subscription</h3>
       <div class="price-tag">$1.99 <small>/ month</small></div>
-      <p class="price-desc">Or $9.99/year — best value.</p>
+      <p class="price-desc">Or $9.99/year, the best value.</p>
       <ul class="price-list">
         <li><b>Unlimited</b> images per batch</li>
+        <li>Delivery Packs with multiple presets</li>
         <li>All built-in presets</li>
         <li>Create, import and use custom presets</li>
         <li>Restore purchases through Apple</li>
@@ -826,19 +923,27 @@ footer{ border-top: 1px solid var(--line); padding: 48px var(--pad); }
   <div class="faq">
     <div class="faq-item open">
       <div class="faq-q">Does SmallerImage upload my photos? <span class="chev">+</span></div>
-      <div class="faq-a">Never. All processing happens on your Mac's CPU/GPU — the app doesn't even have network access. It passes Apple's sandbox and hardened runtime verification.</div>
+      <div class="faq-a">No. SmallerImage processes image pixels and metadata on your Mac. It does not upload images or use analytics and advertising SDKs. StoreKit connects to Apple when you buy or restore Pro.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Which formats can I convert between? <span class="chev">+</span></div>
-      <div class="faq-a">HEIC, JPG/JPEG, PNG, WebP, TIFF, AVIF, and GIF are supported as inputs. GIF output is converted to a supported still-image format; animated frames are not preserved.</div>
+      <div class="faq-a">HEIC, JPG/JPEG, PNG, WebP, TIFF, AVIF, and GIF are supported as inputs. Export to JPG, PNG, HEIC, WebP, TIFF, or AVIF. GIF conversion creates a still image; animated frames are not preserved.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can I resize without cropping, or crop to an exact size? <span class="chev">+</span></div>
+      <div class="faq-a">Both. Use ≤ Max to fit the complete image inside a width and height while preserving its aspect ratio. Use = Equal (crop) to fill exact dimensions and automatically center-crop the excess. SmallerImage does not provide free-form crop positioning.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">How is this different from Preview or online compressors? <span class="chev">+</span></div>
-      <div class="faq-a">Preview can't batch, and online tools upload your images to a stranger's server. SmallerImage gives you batch processing, reusable presets, format conversion and a visual comparison — all offline.</div>
+      <div class="faq-a">SmallerImage combines target file size, dimensions and format in one batch. You can compare each result and use Delivery Pack to create several organized output versions in one run.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Will my image quality suffer? <span class="chev">+</span></div>
-      <div class="faq-a">Use the Compare view to zoom in, drag the before-and-after slider, and redo the compression with different settings. For lossy formats such as JPEG, even a 100% quality setting is not guaranteed to be mathematically lossless.</div>
+      <div class="faq-a">Use Compare to inspect detail, gradients and transparency before export. The five-step PNG FAST–BEST slider trades time for more thorough palette optimization; it reduces colors and can change image detail or transparency. Higher levels are not guaranteed to improve every image. For lossy formats such as JPEG, even a 100% quality setting is not guaranteed to be mathematically lossless.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Is the target file size guaranteed? <span class="chev">+</span></div>
+      <div class="faq-a">Target size is best effort. Outputs above the limit are flagged. PNG may also need smaller pixel dimensions after reducing colors, so check the actual size and dimensions before export. For photos, try JPG, WebP or HEIC, reduce dimensions, or increase the limit.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Is it a one-time purchase or subscription? <span class="chev">+</span></div>
@@ -846,7 +951,7 @@ footer{ border-top: 1px solid var(--line); padding: 48px var(--pad); }
     </div>
     <div class="faq-item">
       <div class="faq-q">What Mac do I need? <span class="chev">+</span></div>
-      <div class="faq-a">macOS 14 Sonoma or later. Universal binary — optimized for Apple Silicon (M1/M2/M3/M4) and still runs on Intel.</div>
+      <div class="faq-a">macOS 14 Sonoma or later. The universal binary is optimized for Apple Silicon (M1/M2/M3/M4) and also runs on Intel.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Which languages are supported? <span class="chev">+</span></div>
@@ -857,8 +962,8 @@ footer{ border-top: 1px solid var(--line); padding: 48px var(--pad); }
 
 <!-- FINAL CTA -->
 <section class="final-cta" id="download">
-  <h2>Smaller images.<br/>Taking up 0 of your time.</h2>
-  <p>Free to try. No sign-up. No upload. SmallerImage is being prepared for release on the Mac App Store.</p>
+  <h2>One batch.<br/>Every image ready to deliver.</h2>
+  <p>Set the target size, format and dimensions. Compare each result or create several organized versions without uploading your images.</p>
   <div class="hero-ctas">
     <span class="btn btn-primary" aria-disabled="true">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 12.5c0-3 2.4-4.4 2.5-4.5-1.4-2-3.5-2.3-4.2-2.3-1.8-.2-3.5 1-4.4 1-.9 0-2.3-1-3.8-.9-2 0-3.8 1.1-4.8 2.9-2 3.5-.5 8.7 1.5 11.6 1 1.4 2.1 3 3.6 2.9 1.4-.1 2-.9 3.7-.9 1.7 0 2.3.9 3.8.9 1.6 0 2.6-1.4 3.6-2.8 1.1-1.6 1.6-3.2 1.6-3.3-.1-.1-3.1-1.2-3.1-4.6zM14.6 3.6c.8-.9 1.3-2.2 1.1-3.6-1.1 0-2.5.7-3.3 1.6-.7.8-1.4 2.1-1.2 3.4 1.2.1 2.5-.6 3.4-1.4z"/></svg>
@@ -875,7 +980,7 @@ footer{ border-top: 1px solid var(--line); padding: 48px var(--pad); }
         <div class="brand-mark"></div>
         <span>SmallerImage</span>
       </div>
-      <p>The native Mac image compressor, converter &amp; resizer. Built by an indie developer who got tired of uploading photos to strangers.</p>
+      <p>Prepare image batches to the file size, format and dimensions you need, with comparison and multi-preset Delivery Packs.</p>
     </div>
     <div class="footer-col">
       <h4>Product</h4>
@@ -982,6 +1087,8 @@ document.querySelectorAll('.faq-item').forEach(it => {
     let p = ((clientX - rect.left) / rect.width) * 100;
     p = Math.max(2, Math.min(98, p));
     inner.style.setProperty('--split', p + '%');
+    const handle = inner.querySelector('.compare-handle');
+    if (handle) handle.setAttribute('aria-valuenow', Math.round(p));
   }
 
   // Mouse: click + drag anywhere on the card
@@ -1004,6 +1111,16 @@ document.querySelectorAll('.faq-item').forEach(it => {
   }, { passive: true });
   inner.addEventListener('touchend', () => { dragging = false; });
   inner.addEventListener('touchcancel', () => { dragging = false; });
+
+  const handle = inner.querySelector('.compare-handle');
+  handle?.addEventListener('keydown', e => {
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    const current = Number(handle.getAttribute('aria-valuenow') || 50);
+    const next = Math.max(2, Math.min(98, current + (e.key === 'ArrowRight' ? 2 : -2)));
+    inner.style.setProperty('--split', next + '%');
+    handle.setAttribute('aria-valuenow', next);
+    e.preventDefault();
+  });
 })();
 </script>
 

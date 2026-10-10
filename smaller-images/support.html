@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Support | SmallerImage</title>
-  <meta name="description" content="Support and frequently asked questions for the SmallerImage macOS app.">
+  <title>Help &amp; Support | SmallerImage</title>
+  <meta name="description" content="Learn how to set image size, format and dimensions with SmallerImage for macOS, create Delivery Packs, remove image metadata and manage Pro access.">
   <link rel="icon" type="image/png" href="./assets/logo-small.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,29 +25,67 @@
 
   <main class="legal" id="main">
     <p class="eyebrow">Help / Support</p>
-    <h1>Support</h1>
-    <p class="updated">Updated August 20, 2026</p>
-    <p class="summary">Answers to common questions about compression, Free and Pro access, exports, and purchases.</p>
+    <h1>Help &amp; Support</h1>
+    <p class="updated">Updated October 10, 2026</p>
+    <p class="summary">SmallerImage prepares image batches for their destination: compress the file size, convert the format, resize proportionally, or center-crop to exact dimensions. Processing stays on your Mac.</p>
 
     <section>
-      <h2>How many images can I compress for free?</h2>
-      <p>There is no daily limit. The free version processes up to five images per batch with all formats and manual compression controls. Presets require Pro.</p>
+      <h2>How do I convert images to another format?</h2>
+      <p>Add your images, open the Format menu in the settings panel, and choose an output such as JPG, PNG, HEIC, WebP, TIFF, or AVIF. Choose Keep original when you only want to compress or resize without changing the format. The selected format applies to the batch.</p>
     </section>
     <section>
-      <h2>What does Pro unlock?</h2>
-      <p>Pro removes the five-image batch limit and unlocks all built-in and custom presets. It is available for $1.99/month, $9.99/year, or as a $19.99 lifetime purchase. The Mac App Store shows the final price for your region before purchase. Family Sharing is not included.</p>
+      <h2>How do I resize without cropping?</h2>
+      <p>In Width &amp; Height, choose Scale to reduce every image by a percentage. For a pixel limit, choose Dimensions and then ≤ Max. SmallerImage fits the complete image inside the width and height you enter while preserving its aspect ratio. It does not crop in this mode.</p>
+    </section>
+    <section>
+      <h2>How do I crop to exact dimensions?</h2>
+      <p>Choose Dimensions and then = Equal (crop), and enter the target width and height. SmallerImage scales the image to fill that frame and center-crops the excess. This is an automatic center crop, not a free-form crop editor. Enable Enlarge if smaller than target when the output must always match the requested dimensions.</p>
+    </section>
+    <section>
+      <h2>What does Compare mode show?</h2>
+      <p>Compare displays the original beside the processed output. Drag the split slider and zoom in to inspect image detail and framing, then check the displayed output format, pixel dimensions, and file size before export. If the result is not right, adjust the settings and process it again without re-importing the original.</p>
     </section>
     <section>
       <h2>What formats are supported?</h2>
-      <p>SmallerImage supports common formats including PNG, JPEG, HEIC, WebP, TIFF, AVIF, and GIF as inputs. Animated GIF frames are not preserved when exporting to a still-image format.</p>
+      <p>SmallerImage accepts PNG, JPEG, HEIC, WebP, TIFF, AVIF, and GIF inputs, and exports JPG, PNG, HEIC, WebP, TIFF, or AVIF. GIF output is not available; converting a GIF creates a still image and does not preserve animation.</p>
     </section>
     <section>
-      <h2>Where are my compressed images saved?</h2>
-      <p>Choose a folder, save beside each source image, or export individual results. When replacing source files, keep a backup because lossy compression cannot be undone.</p>
+      <h2>Can one preset include every output setting?</h2>
+      <p>Yes. A preset can combine quality or a target file size with output format, scale or dimensions, fit or center-crop behavior, and the PNG optimization level. Existing presets without a PNG level use Balanced. Pro unlocks every built-in preset and lets you create, import and reuse custom presets.</p>
+    </section>
+    <section>
+      <h2>What does the PNG FAST–BEST slider do?</h2>
+      <p>The five levels trade processing time for more thorough color-palette optimization. Balanced is the default; FAST favors speed and BEST spends more time refining the result. PNG optimization reduces colors and may change fine detail or transparency, so it is not mathematically lossless. A higher level does not guarantee a smaller or sharper result for every image. Use Compare to check edges, gradients and transparent areas.</p>
+      <p>When Keep original contains both PNG and other formats, the panel shows PNG optimization and the ordinary quality control together. Each control applies to the corresponding files. All manual controls, including the PNG slider, are available in Free.</p>
+    </section>
+    <section>
+      <h2>Is the target file size guaranteed?</h2>
+      <p>No. Target size is best effort. Results that remain above the limit are marked with a warning and can still be exported. For PNG, SmallerImage first reduces palette colors and may make a final attempt at smaller pixel dimensions. Check the actual file size and dimensions before export. For photos or very small limits, try JPG, WebP or HEIC, reduce dimensions, or increase the limit.</p>
+    </section>
+    <section>
+      <h2>What is a Delivery Pack?</h2>
+      <p>A Delivery Pack runs two or more favorite presets against the same batch. SmallerImage creates a separate folder for each preset and keeps the original filenames. Use it to prepare client, website and social versions in one run. Delivery Packs require Pro.</p>
+    </section>
+    <section>
+      <h2>Where are my processed images saved?</h2>
+      <p>Choose Export later, Save to folder, or Same as source. Same as source requires a suffix and may ask you to authorize the source folder once. Delivery Pack creates a Smaller Delivery folder, then sorts files into subfolders named after each preset.</p>
+      <p>Single-image and ordinary batch exports prepare a complete copy before replacing an existing file. If an export fails, the app shows the failed filename and reason; check the folder permission and free disk space before trying again.</p>
+    </section>
+    <section>
+      <h2>Can SmallerImage remove location data?</h2>
+      <p>Yes. Privacy settings can keep metadata, remove GPS coordinates while preserving camera details, or remove EXIF, GPS, IPTC, camera and copyright metadata from the exported image.</p>
+    </section>
+    <section>
+      <h2>How many images can I process for free?</h2>
+      <p>There is no daily limit. The free version processes up to five images per batch with all output formats and manual compression, conversion, resize, and center-crop controls. Presets require Pro.</p>
+    </section>
+    <section>
+      <h2>What does Pro unlock?</h2>
+      <p>Pro removes the five-image batch limit, unlocks all built-in and custom presets, and adds multi-preset Delivery Packs. It is available for $1.99/month, $9.99/year, or as a $19.99 lifetime purchase. The Mac App Store shows the final price for your region before purchase. Family Sharing is not included.</p>
     </section>
     <section>
       <h2>Are my images uploaded?</h2>
-      <p>No. Image processing runs locally on your Mac. SmallerImage does not upload your images or use analytics or advertising SDKs.</p>
+      <p>No. Compression, conversion, resizing, and cropping all run locally on your Mac. SmallerImage does not upload your images or use analytics or advertising SDKs.</p>
     </section>
     <section>
       <h2>How do I restore or manage a purchase?</h2>
